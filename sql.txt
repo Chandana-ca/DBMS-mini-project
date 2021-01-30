@@ -1,0 +1,48 @@
+create table customer(
+cust_id number(10),
+cust_name varchar(10),
+cust_address varchar(15),
+cust_phone number(10),
+primary key(cust_id));
+
+insert into customer values(20,'Chandana','Bangalore',9008456956);
+insert into customer values(15,'Pooja','Mysore',8971042396);
+insert into customer values(10,'Sneha','Mangalore',8971597306);
+  
+create table cart(
+cart_id number(5),
+quantity number(10),
+total_cost number(10),
+primary key(cart_id));
+
+insert into cart values(14,50,5000);
+insert into cart values(16,60,3900);
+insert into cart values(12,40,4000);
+
+create table product(
+pdt_id number(10),
+pdt_name varchar(15),
+pdt_cost number(5),
+cart_id number(5),
+primary key(pdt_id),
+foreign key (cart_id) references cart (cart_id) on delete cascade);
+
+insert into product values(1,'Book',60,12);
+insert into product values(3,'Watch',500,16);
+insert into product values(2,'Dress',700,14);
+
+create table payment(
+pay_id number(10),
+pay_type varchar(15),
+pdt_id number(10),
+cust_id number(10),
+primary key(pay_id),
+foreign key (cust_id) references customer (cust_id) on delete cascade,
+foreign key (pdt_id) references product (pdt_id) on delete cascade);
+
+insert into payment values(123,'Cash',1,20);
+insert into payment values(678,'Google pay',2,15);
+insert into payment values(789,'Card',3,10);
+
+
+
